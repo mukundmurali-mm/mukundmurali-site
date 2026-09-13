@@ -65,7 +65,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         )}
 
         <div className="mt-14 max-w-3xl">
-          <PostContent content={post.content} />
+          <PostContent content={post.content} cover={post.cover} />
         </div>
 
         <div className="mt-20 border-t border-border pt-10">

@@ -16,8 +16,23 @@ function preprocessMarkdown(md: string): string {
   return md
 }
 
-export function PostContent({ content }: { content: string }) {
-  const processed = preprocessMarkdown(content)
+export function PostContent({ content, cover }: { content: string; cover?: string }) {
+  let processed = preprocessMarkdown(content)
+
+  // Remove the first image from markdown if it matches the cover image (avoid duplicate)
+  if (cover && !cover.includes('placeholder')) {
+    // Strip query params for comparison
+    const coverBase = cover.split('?')[0]
+    processed = processed.replace(
+      /^(\s*(?:#[^\n]*\n\s*)?)?!\[[^\]]*\]\([^)]*\)\n?(?:\*[^\n]*\*\n?)?/m,
+      (match) => {
+        const matchBase = match.match(/\(([^?)]+)/)?.[1] || ''
+        return matchBase === coverBase || cover.includes(matchBase) || matchBase.includes(coverBase)
+          ? ''
+          : match
+      }
+    )
+  }
 
   return (
     <div className="prose-custom">
