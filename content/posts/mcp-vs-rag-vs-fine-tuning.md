@@ -14,7 +14,7 @@ That was the wrong tool. Not because fine-tuning is bad, but because they reache
 
 This confusion is everywhere right now. "MCP vs RAG vs fine-tuning" gets framed as a cage match where one technique wins. It isn't. They solve three different problems, and the people who ship reliable AI systems usually use more than one at once. Here's how to tell them apart and choose without burning three weeks on the wrong thing.
 
-![Three tools, three jobs: RAG for static knowledge, MCP for live data and actions, fine-tuning for behavior and tone](images/mcp-rag-ft-overview.png)
+![Three tools, three jobs: RAG for static knowledge, MCP for live data and actions, fine-tuning for behavior and tone](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/mcp-rag-ft-overview.png)
 
 **What you'll learn:**
 
@@ -39,7 +39,7 @@ First, MCP didn't exist yet in any standard form — Anthropic only introduced i
 
 Second, the question itself shifted. The old framing was about *what the model knows*. With the rise of agentic AI, the more important question became *what the model can do* — read a live system, call a tool, complete a task. Prompt engineering didn't go away; it's now the baseline you always do first. But "pick one of three" became "layer four," and MCP is the new piece most people are still slotting in.
 
-![The framing changed: then it was prompt engineering, RAG, or fine-tuning — pick one. Now it's prompting plus RAG plus MCP plus fine-tuning, layered together.](images/mcp-rag-ft-evolution.png)
+![The framing changed: then it was prompt engineering, RAG, or fine-tuning — pick one. Now it's prompting plus RAG plus MCP plus fine-tuning, layered together.](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/mcp-rag-ft-evolution.png)
 
 ## RAG: for knowledge that doesn't change by the second
 
@@ -90,7 +90,7 @@ Mapped to real scenarios:
 - "Always respond in our support tone and format" → fine-tuning (behavior)
 - "Summarize this 40-page contract" → just a bigger context window, none of the above
 
-![Decision tree: ask whether the problem is knowledge or behavior. Knowledge splits into static (RAG) versus live or actionable (MCP). Behavior leads to fine-tuning.](images/mcp-rag-ft-decision-tree.png)
+![Decision tree: ask whether the problem is knowledge or behavior. Knowledge splits into static (RAG) versus live or actionable (MCP). Behavior leads to fine-tuning.](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/mcp-rag-ft-decision-tree.png)
 
 ## The real answer: you'll probably combine them
 

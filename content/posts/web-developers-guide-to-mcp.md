@@ -2,7 +2,7 @@
 title: "The Web Developer's Guide to MCP: Connecting LLMs to Browser Tools & APIs"
 datePublished: "2026-09-16"
 slug: "web-developers-guide-to-mcp"
-coverImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200"
+coverImage: "https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/mcp-architecture-diagram.png"
 tags: ["ai", "mcp", "web-development", "llm", "browser-automation", "api"]
 ---
 
@@ -35,6 +35,8 @@ MCP has three distinct roles, and understanding them matters before you write an
 **The Server** exposes capabilities via MCP primitives. It can run locally (as a subprocess communicating over stdio) or remotely (as an HTTP service). This is what you, as a web developer, would build.
 
 A critical design property: **each client-server connection is isolated.** One server cannot reach into another server's session. This is a deliberate security boundary, and it matters more than you might think (more on security later).
+
+![MCP architecture diagram showing the Host application managing isolated MCP Client sessions over stdio or Streamable HTTP to standalone MCP Servers, which expose tools, resources, and prompts discovered at runtime via tools/list](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/mcp-architecture-diagram.png)
 
 ### The Three Primitives
 
@@ -177,6 +179,8 @@ This is the question I hear most from web developers who've used OpenAI's functi
 | **Transport** | Embedded in chat API | Independent protocol (stdio, HTTP) |
 | **Ecosystem** | Per-provider tool libraries | 25,000+ shared servers |
 | **Composability** | One provider's tools per request | Multiple servers simultaneously |
+
+![Side-by-side comparison: function calling requires provider-specific tool definitions rebuilt for each LLM (M providers times N tools), while MCP exposes one server's tools to any host through a shared JSON-RPC protocol (M providers plus N tools)](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/mcp-vs-function-calling-diagram.png)
 
 Under the hood, MCP clients typically translate MCP tool definitions into the host LLM's native function-calling format. So MCP doesn't replace function calling — it provides the discovery and connectivity layer that sits above it.
 

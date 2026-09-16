@@ -34,7 +34,7 @@ Leo changes this. It's not just a storage system — it's an active participant.
 
 Everything flows through a single interface: **Telegram**. One message, and Leo gets to work — whether that's pulling research, writing code, transcribing my journal, or delivering my morning briefing.
 
-![Leo Architecture](images/diagram_bridge.png)
+![Leo Architecture](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/diagram_bridge.png)
 
 ---
 
@@ -46,7 +46,7 @@ Now, before I've opened a browser, **Leo delivers a curated AI briefing to my Te
 
 It's filtered specifically for me — model releases, agent frameworks, tools I use, research I care about. Formatted as a tight, scannable brief. Five minutes to read. Zero minutes to compile.
 
-![Leo's Morning Brief in Telegram](images/telegram_morning_brief.png)
+![Leo's Morning Brief in Telegram](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/telegram_morning_brief.png)
 
 The cumulative effect is significant. Over weeks and months, I've stayed genuinely current in a fast-moving field without the distraction tax of open-ended browsing. I start the day informed and focused, not reactive and scattered.
 
@@ -56,7 +56,7 @@ A good personal assistant doesn't wait to be asked. Leo doesn't either.
 
 ## 2. Delegating Coding Tasks to Claude Code
 
-![The Coding Delegation Flow](images/diagram_visualizer.png)
+![The Coding Delegation Flow](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/diagram_visualizer.png)
 
 When I have a coding task, I used to need to be at my desk, in my IDE, in the right mental mode to execute.
 
@@ -74,7 +74,7 @@ For anyone juggling a full-time role alongside side projects and learning, this 
 
 ## 3. NotebookLM Integration: Research That Actually Sticks
 
-![The Knowledge Pipeline](images/diagram_siphon.png)
+![The Knowledge Pipeline](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/diagram_siphon.png)
 
 Deep research has a graveyard problem.
 
@@ -110,7 +110,7 @@ I didn't realise how much I was losing by keeping them separate until they were 
 
 ## 5. Weekly and Monthly Reflections
 
-![The Memory and Reflection Layer](images/diagram_memory.png)
+![The Memory and Reflection Layer](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/diagram_memory.png)
 
 The most underrated thing a second brain can do is help you see yourself clearly over time.
 

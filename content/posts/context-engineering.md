@@ -27,7 +27,7 @@ This is called **Context Engineering**.
 
 Think of an AI model's "mind" like a desk.
 
-![The AI's Desk — what the model can and cannot see](images/img1_the_desk.png)
+![The AI's Desk — what the model can and cannot see](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/img1_the_desk.png)
 
 When you send a message, the AI can only see what's on that desk right now. It doesn't remember your last conversation. It doesn't know your company's strategy, your team's terminology, or why this task matters. It only sees what you've placed in front of it.
 
@@ -47,7 +47,7 @@ And here's the surprising part — more isn't always better.
 
 Dumping everything you can think of into a prompt doesn't help. It actually hurts. Research shows that AI models perform best when information appears at the *beginning* or *end* of what they're given. Anything buried in the middle tends to get lost — a phenomenon researchers call the **"Lost in the Middle"** problem.
 
-![Lost in the Middle — the U-shaped attention curve](images/img2_lost_in_middle.png)
+![Lost in the Middle — the U-shaped attention curve](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/img2_lost_in_middle.png)
 
 There's also a **signal-to-noise** issue. If you paste in 50 pages of documentation when only 3 paragraphs are relevant, the AI has to wade through noise to find the signal. The result: slower, less accurate, more generic responses.
 
@@ -57,7 +57,7 @@ This is why context engineering is a discipline, not just a tip. It requires you
 
 ## Three Habits That Separate Good AI Users from Great Ones
 
-![Before vs After — the power of context in a prompt](images/img3_before_after.png)
+![Before vs After — the power of context in a prompt](https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/img3_before_after.png)
 
 ### 1. Give the AI a Role and a Reason
 
