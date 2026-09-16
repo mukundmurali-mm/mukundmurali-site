@@ -24,7 +24,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             <ArrowLeft size={14} /> All writing
           </Link>
           <Link href="/" className="font-mono text-xs text-muted-foreground">
-            mukund.mm
+            Mukund Murali
           </Link>
         </div>
       </header>
