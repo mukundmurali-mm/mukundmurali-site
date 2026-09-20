@@ -30,7 +30,7 @@ And here's the structural problem: governance — security, compliance, quality 
 
 The result? We've been measuring delivery velocity in story points while hoping it correlates with business value. It usually doesn't.
 
-![AI-Native SDLC Pipeline — AI tools augmenting every phase of the software development lifecycle](https://blogs.mukundmurali.in/images/ai-sdlc-pipeline-diagram.png)
+![AI-Native SDLC Pipeline — AI tools augmenting every phase of the software development lifecycle](https://mukundmurali-mm.github.io/hashnode-blogs/images/ai-sdlc-pipeline-diagram.png)
 
 ## AI Augmentation, Phase by Phase
 
