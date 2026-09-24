@@ -45,7 +45,7 @@ This is where the agent meets the real world. RAG (retrieval-augmented generatio
 
 The data here tells a clear story about where agents are heading. [Analysis of 177,000 MCP tools](https://arxiv.org/html/2603.23802v1) shows that action tool usage — tools that actually modify environments, not just observe them — grew from 27% to 65% of total agent tool uses between November 2024 and February 2026. Agents are moving from reading the world to writing to it, and that shift carries real consequences for how we think about skills.
 
-![AI Agent Skill Architecture — showing reasoning, planning, and tool use layers with meta-skills, memory stack, and context window](https://blogs.mukundmurali.in/skills-used-in-ai-agents-diagram.svg)
+![AI Agent Skill Architecture — showing reasoning, planning, and tool use layers with meta-skills, memory stack, and context window](https://mukundmurali-mm.github.io/hashnode-blogs/skills-used-in-ai-agents-diagram.svg)
 
 Here's the thing, though: **these three layers are necessary but not sufficient.** Every framework gives you reasoning, planning, and tool use. The agents that break in production break for a different reason entirely.
 
