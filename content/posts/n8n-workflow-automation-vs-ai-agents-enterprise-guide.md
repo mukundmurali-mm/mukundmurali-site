@@ -68,7 +68,7 @@ Two nodes. One connection. A new GitHub issue fires a Slack message. You could b
 
 **N8n 2.0** (released late 2025) added some significant improvements: task runners that sandbox code execution, visual workflow versioning with diffs, sub-workflow composition, built-in data tables for state management, and — critically — a multi-main architecture for high availability. These are the kinds of features that signal a platform maturing from "developer toy" to "enterprise infrastructure."
 
-![N8n Platform Architecture](https://blogs.mukundmurali.in/images/n8n-architecture.png)
+![N8n Platform Architecture](https://mukundmurali.in/images/n8n-architecture.png)
 
 ## The Spectrum: Workflows vs. Agents
 
@@ -85,7 +85,7 @@ Deterministic Workflows ←————————————————→ A
   └──────────────┘    └─────────────────┘      └──────────────────┘
 ```
 
-![The Automation Spectrum](https://blogs.mukundmurali.in/images/n8n-spectrum.png)
+![The Automation Spectrum](https://mukundmurali.in/images/n8n-spectrum.png)
 
 On the left, you have n8n's traditional workflows: explicit data flow, deterministic execution, visually traceable on a canvas. On the right, you have tools like Hermes (Claude Code) — autonomous AI agents where the LLM *is* the orchestrator. You give it a task, it reasons about what to do, writes code, runs commands, and iterates. There's no visual canvas; the model decides every step.
 

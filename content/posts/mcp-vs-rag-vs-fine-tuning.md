@@ -2,7 +2,7 @@
 title: "MCP vs RAG vs Fine-Tuning: How to Actually Choose"
 datePublished: 2026-06-20T00:00:00.000Z
 slug: mcp-vs-rag-vs-fine-tuning
-cover: images/mcp-rag-ft-overview.png
+cover: https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/mcp-rag-ft-overview.png
 tags: ai, llm, mcp, rag, fine-tuning
 ---
 

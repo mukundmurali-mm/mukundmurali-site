@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Clock } from 'lucide-react'
@@ -6,6 +7,39 @@ import { PostContent } from './post-content'
 
 export function generateStaticParams() {
   return posts.map(post => ({ slug: post.slug }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post = getPost(slug)
+  if (!post) return {}
+
+  const url = `/blog/${post.slug}`
+  const image = post.cover && !post.cover.includes('placeholder') ? post.cover : undefined
+
+  return {
+    // `absolute` skips any title template so importers see the bare post title
+    title: { absolute: post.title },
+    description: post.excerpt,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      title: post.title,
+      description: post.excerpt,
+      url,
+      siteName: 'Mukund Murali',
+      publishedTime: post.date || undefined,
+      authors: ['Mukund Murali'],
+      tags: post.tags,
+      images: image ? [{ url: image }] : undefined,
+    },
+    twitter: {
+      card: image ? 'summary_large_image' : 'summary',
+      title: post.title,
+      description: post.excerpt,
+      images: image ? [image] : undefined,
+    },
+  }
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {

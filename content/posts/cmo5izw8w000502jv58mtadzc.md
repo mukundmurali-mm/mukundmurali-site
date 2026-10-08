@@ -42,8 +42,6 @@ In this system, **Obsidian is the IDE, Claude is the programmer, and your Wiki i
 ### Step 1: The "Simple & Flat" Structure
 Forget complex folders. Create one main project folder with three sub-directories. This structure allows Claude to navigate your data without getting lost.
 
-![The Knowledge Flow](https://i.imgur.com/your_diagram_link_placeholder.png)
-
 ```text
 my-knowledge-base/
 ├── raw/      # The "Junk Drawer": Articles, screenshots, raw notes, exports. (Immutable)

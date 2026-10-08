@@ -8,6 +8,7 @@ const _inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const _jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mukundmurali.in'),
   title: 'Mukund Murali — Technical Product Manager & AI Product Builder',
   description: 'Portfolio and writing by Mukund Murali, a Technical Product Manager building at the intersection of cloud infrastructure, Generative AI, and product thinking.',
   generator: 'v0.app',

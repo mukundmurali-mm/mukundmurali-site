@@ -2,7 +2,7 @@
 title: "Leo: My Personal AI Assistant and Second Brain"
 datePublished: 2026-06-06T00:00:00.000Z
 slug: agentic-workflows-with-leo
-cover: images/diagram_bridge.png
+cover: https://raw.githubusercontent.com/mukundmurali-mm/hashnode-blogs/main/images/diagram_bridge.png
 tags: ai, productivity, ai-agents, ollama, obsidian
 ---
 
