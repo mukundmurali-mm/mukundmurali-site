@@ -12,6 +12,18 @@ export const metadata: Metadata = {
   title: 'Mukund Murali — Technical Product Manager & AI Product Builder',
   description: 'Portfolio and writing by Mukund Murali, a Technical Product Manager building at the intersection of cloud infrastructure, Generative AI, and product thinking.',
   generator: 'v0.app',
+  openGraph: {
+    type: 'website',
+    url: 'https://mukundmurali.in',
+    siteName: 'Mukund Murali',
+    title: 'Mukund Murali — Technical Product Manager & AI Product Builder',
+    description: 'Portfolio and writing by Mukund Murali, a Technical Product Manager building at the intersection of cloud infrastructure, Generative AI, and product thinking.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mukund Murali — Technical Product Manager & AI Product Builder',
+    description: 'Portfolio and writing on cloud infrastructure, Generative AI, and product thinking.',
+  },
   icons: {
     icon: [
       {
