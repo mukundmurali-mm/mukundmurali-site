@@ -21,7 +21,9 @@ tags:
 > - It works because a central server only swaps public keys. The traffic itself goes device to device, encrypted with keys that never leave those devices.
 > - A private network is only as private as its members: anything that can reach Pi Pocket can steer it.
 
-I run three agents on a Mac mini at home: Hermes, OpenMauseBot and Pi Pocket. Hermes is my general assistant, with access to my files, terminal and email. OpenMauseBot is the one I'm testing as a chief of staff, partly to see how it compares with a Grok bot. Pi Pocket is a web app for driving a coding agent from a browser. At my desk all three are great. The moment I leave the house they sit behind my router, which lets nothing in from outside, and I wanted to keep it that way. Pi Pocket in particular can run commands on the Mac as me, so opening a port to the internet for it was never going to happen.
+A Grok bot is simply there when I pick up my phone. I'd been testing OpenMauseBot as a chief of staff partly to see how the two compare, and the difference that bothered me most had nothing to do with how smart either one was. Mine ran on a Mac mini at home, and the moment I walked out of the house I couldn't reach it.
+
+That Mac mini runs three agents: Hermes, OpenMauseBot and Pi Pocket. Hermes is my general assistant, with access to my files, terminal and email. OpenMauseBot is the chief of staff I'm testing. Pi Pocket is a web app for driving a coding agent from a browser. At my desk all three work well enough. Away from home they sit behind my router, which lets nothing in from outside, and I wanted to keep it that way. Pi Pocket in particular can run commands on the Mac as me, so opening a port to the internet for it was never going to happen.
 
 ## The first workaround: a Telegram bot
 
