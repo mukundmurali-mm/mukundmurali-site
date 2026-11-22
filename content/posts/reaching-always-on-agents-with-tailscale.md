@@ -15,17 +15,22 @@ tags:
 
 # How I reached my always-on agents from outside my home network
 
-I have a Mac mini at home running agents that are meant to stay on. Away from home, with only my phone, I couldn't get to them. The agents were working fine. I just couldn't reach them.
+I run three agents on a Mac mini at home: Hermes, OpenMauseBot and Pi Pocket. Hermes is my general assistant, with access to my files, terminal and email. Pi Pocket is a web app for driving a coding agent from a browser. At my desk all three are great. The moment I leave the house they sit behind my router, which lets nothing in from outside, and I wanted to keep it that way. Pi Pocket in particular can run commands on the Mac as me, so opening a port to the internet for it was never going to happen.
 
-I run OpenMauseBot and Pi Pocket on that Mac, and the whole point of both is that they keep going when I'm not at the keyboard. At my desk that works well. Away from home, the machine was behind my router, which lets nothing in from outside, and I wanted to keep it that way. Pi Pocket in particular is a web app that can run commands on the Mac as me, so opening a port to the internet for it was never going to happen.
+## The first workaround: a Telegram bot
 
-## The workaround: a Telegram bot
+In mid-November I connected Hermes to Telegram so I could talk to it from my iPhone. I set it up from the Hermes desktop app, and the bot only answers my own Telegram account, which matters for something that can run commands on my Mac.
 
-What I did instead was set up a Telegram bot as a gateway to my Hermes agent. It's a neat trick, and it works for a simple reason: a bot doesn't need anyone to connect to your home network. The machine at home reaches out to Telegram, and Telegram carries messages between my phone and the machine. Nothing is exposed, and my phone didn't need anything installed beyond Telegram, which was already there.
+It also solved the networking problem without me thinking about it. A bot doesn't need a connection into your home network. Hermes on the Mac polls out to Telegram, and Telegram carries the messages between my phone and the machine. Nothing is exposed, and my phone needed no extra app. For quick questions it worked well, and Hermes can send the results of scheduled jobs to the same chat.
 
-For quick questions and small tasks, it was good enough for a while.
+Then I started running into the edges.
 
-But a chat window is a narrow way to reach an agent. I wanted the real interface, with my phone talking to my Mac as if I were sitting next to it.
+- I asked whether I could call it. You can't. Telegram bots can't take voice or video calls, so the closest thing is a voice note.
+- It only answers while the Mac is on, awake and online. When the connection drops, the gateway log fills with lines like "Telegram network error, reconnecting in 10s".
+- It only ever reaches Hermes. Pi Pocket is a web app, and a Telegram chat can't open it.
+- Every message passes through Telegram's servers, and bot chats aren't end-to-end encrypted. That's fine for questions about the weather, less so for an agent that can run commands on my computer.
+
+What I wanted was the real thing: my phone talking to my Mac as if I were sitting next to it.
 
 ![Telegram bot gateway compared with a direct Tailscale tunnel](/images/tailscale/01-telegram-vs-tailscale.svg)
 *Before and after: a chat window in the middle, or a private tunnel straight to the Mac.*
