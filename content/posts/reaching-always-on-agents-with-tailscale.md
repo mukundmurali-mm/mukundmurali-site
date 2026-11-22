@@ -17,13 +17,13 @@ tags:
 
 > **TL;DR**
 > - My agents run on a Mac mini behind a router that lets nothing in from outside. A Telegram bot reached Hermes, but nothing else.
-> - Tailscale puts my phone and Mac on a private, encrypted network. Setup was two apps and one login, with nothing opened on the router, and both Pi Pocket and OpenMauseBot now load on my phone.
+> - Tailscale puts my phone and Mac on a private, encrypted network. Setup was two apps and one login, with nothing opened on the router, and both Pi Pocket and OpenMausBot now load on my phone.
 > - It works because a central server only swaps public keys. The traffic itself goes device to device, encrypted with keys that never leave those devices.
 > - A private network is only as private as its members: anything that can reach Pi Pocket can steer it.
 
-A Grok bot is simply there when I pick up my phone. I'd been testing OpenMauseBot as a chief of staff partly to see how the two compare, and the difference that bothered me most had nothing to do with how smart either one was. Mine ran on a Mac mini at home, and the moment I walked out of the house I couldn't reach it.
+A Grok bot is simply there when I pick up my phone. I'd been testing OpenMausBot as a chief of staff partly to see how the two compare, and the difference that bothered me most had nothing to do with how smart either one was. Mine ran on a Mac mini at home, and the moment I walked out of the house I couldn't reach it.
 
-That Mac mini runs three agents: Hermes, OpenMauseBot and Pi Pocket. Hermes is my general assistant, with access to my files, terminal and email. OpenMauseBot is the chief of staff I'm testing. Pi Pocket is a web app for driving a coding agent from a browser. At my desk all three work well enough. Away from home they sit behind my router, which lets nothing in from outside, and I wanted to keep it that way. Pi Pocket in particular can run commands on the Mac as me, so opening a port to the internet for it was never going to happen.
+That Mac mini runs three agents: Hermes, OpenMausBot and Pi Pocket. Hermes is my general assistant, with access to my files, terminal and email. OpenMausBot is the chief of staff I'm testing. Pi Pocket is a web app for driving a coding agent from a browser. At my desk all three work well enough. Away from home they sit behind my router, which lets nothing in from outside, and I wanted to keep it that way. Pi Pocket in particular can run commands on the Mac as me, so opening a port to the internet for it was never going to happen.
 
 ## The first workaround: a Telegram bot
 
@@ -111,7 +111,7 @@ npm start -- --access tailscale-serve   # https at the machine's tailnet name
 
 Plain http worked straight away, and the tailnet encrypts it anyway. The https mode needs two extra things: MagicDNS and HTTPS certificates turned on in the Tailscale admin console, and your user set as the operator with `sudo tailscale set --operator=$USER`. It also failed for me at first, for a dull reason. My copy of Pi Pocket was too old to have that mode at all, and it took me a while to stop blaming Tailscale.
 
-OpenMauseBot was the easy one. It was already listening on my Mac's tailnet address, so once my phone was on the tailnet I opened that address in the browser and it loaded. That's the part of this setup I like most: the network doesn't care what the app is. Anything listening on the Mac's tailnet address is reachable from my phone, and anything bound only to localhost stays private until I choose to serve it.
+OpenMausBot was the easy one. It was already listening on my Mac's tailnet address, so once my phone was on the tailnet I opened that address in the browser and it loaded. That's the part of this setup I like most: the network doesn't care what the app is. Anything listening on the Mac's tailnet address is reachable from my phone, and anything bound only to localhost stays private until I choose to serve it.
 
 The remaining problem is restarts. If the Mac reboots while I'm away, the apps only come back if the disk is unlocked and a user is logged in, and FileVault gets in the way of both. That deserves its own post.
 
