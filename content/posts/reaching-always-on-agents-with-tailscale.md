@@ -15,6 +15,12 @@ tags:
 
 # How I reached my always-on agents from outside my home network
 
+> **TL;DR**
+> - My agents run on a Mac mini behind a router that lets nothing in from outside. A Telegram bot reached Hermes, but nothing else.
+> - Tailscale puts my phone and Mac on a private, encrypted network. Setup was two apps and one login, with nothing opened on the router.
+> - It works because a central server only swaps public keys. The traffic itself goes device to device, encrypted with keys that never leave those devices.
+> - A private network is only as private as its members: anything that can reach Pi Pocket can steer it.
+
 I run three agents on a Mac mini at home: Hermes, OpenMauseBot and Pi Pocket. Hermes is my general assistant, with access to my files, terminal and email. Pi Pocket is a web app for driving a coding agent from a browser. At my desk all three are great. The moment I leave the house they sit behind my router, which lets nothing in from outside, and I wanted to keep it that way. Pi Pocket in particular can run commands on the Mac as me, so opening a port to the internet for it was never going to happen.
 
 ## The first workaround: a Telegram bot
@@ -32,27 +38,23 @@ Then I started running into the edges.
 
 What I wanted was the real thing: my phone talking to my Mac as if I were sitting next to it.
 
-![Telegram bot gateway compared with a direct Tailscale tunnel](/images/tailscale/01-telegram-vs-tailscale.svg)
-*Before and after: a chat window in the middle, or a private tunnel straight to the Mac.*
+![Before and after: a chat window in the middle, or a private tunnel straight to the Mac.](/images/tailscale/01-telegram-vs-tailscale.svg)
 
 ## Then Tailscale
 
-I went looking for a better way and found Tailscale online. I installed it for my agents, my phone could reach my Mac a few minutes later, and I had no idea why it worked. That bothered me enough to go and read how it works.
+I went looking for a better way. The usual options all give something up: port forwarding opens a hole in the firewall, and a public tunnel hands out a link anyone can try. Then I found Tailscale online. I installed it for my agents, my phone could reach my Mac a few minutes later, and I had no idea why it worked. That bothered me enough to go and read how it works.
 
 This post is what I learned, in the order that finally made it make sense to me. Nearly all of it comes from Tailscale's own write-up, [How Tailscale works](https://tailscale.com/blog/how-tailscale-works), which I'd recommend reading in full.
 
-## The problem with reaching a computer at home
-
-Your home computer has no fixed public address. It sits behind a router doing NAT, which is why outsiders can't start a connection to it. The usual fixes all give something up. Port forwarding opens a hole in your firewall. A public tunnel hands out a link anyone can try. A traditional VPN means a central server that everything flows through.
-
-That last model is called hub and spoke. Every device connects to one hub and the hub passes traffic along. It's simple, but it has two costs. The hub is a bottleneck, and if it's far from both ends your traffic takes a detour for no reason. Tailscale's post gives the example of someone in New York reaching a server in New York by way of a head office in San Francisco.
-
 ## Layer one: WireGuard
 
-Tailscale starts from WireGuard, an open source VPN protocol that makes small, fast, encrypted tunnels between two machines. The tunnels are light enough that you can build them between every pair of devices instead of routing everything through a hub. That layout is a mesh, and it means my phone talks directly to my Mac.
+Tailscale starts from WireGuard, an open source VPN protocol that makes small, fast, encrypted tunnels between two machines.
 
-![Hub and spoke network compared with a mesh network](/images/tailscale/02-hub-vs-mesh.svg)
-*Hub and spoke sends everything through one point. A mesh connects devices directly.*
+Most VPNs, WireGuard ones included, use a hub and spoke layout. Every device connects to one central server, which passes traffic along. It's simple, but the hub becomes a bottleneck, and if it's far from both ends your traffic takes a detour for no reason. Tailscale's post gives the example of someone in New York reaching a server in New York by way of a head office in San Francisco.
+
+WireGuard's tunnels are light enough that you can skip the hub and build them between every pair of devices. That layout is a mesh, and it means my phone talks directly to my Mac.
+
+![Hub and spoke sends everything through one point. A mesh connects devices directly.](/images/tailscale/02-hub-vs-mesh.svg)
 
 The catch is that a mesh is a lot of bookkeeping. Every device needs the public key and current address of every other device, and those change whenever a phone moves between wifi and mobile data. Doing that by hand for even ten devices means ninety tunnel configurations. The rest of Tailscale exists to take that work away.
 
@@ -62,14 +64,13 @@ Each device generates its own key pair when it joins. The private key stays on t
 
 This is the part that made me stop worrying. The coordination server is hub and spoke, but it carries almost no traffic. It's a drop box for public keys and policy. My actual data goes straight between my phone and my Mac, encrypted with keys that only those two devices hold. Tailscale's servers can't read it.
 
-![Control plane exchanges keys while the data plane carries encrypted traffic](/images/tailscale/03-control-vs-data-plane.svg)
-*Keys go through the coordination server. My traffic never does.*
+![Keys go through the coordination server. My traffic never does.](/images/tailscale/03-control-vs-data-plane.svg)
 
 It also explains how login works. Tailscale doesn't run its own password system. It hands sign-in to an identity provider you already use, such as Google or Microsoft, so there is no separate VPN account to look after. Installing the app and signing in is what creates the drop box for my devices. That's why the setup took two apps and one login.
 
 ## Layer three: getting through the router
 
-So far the story assumed every device was reachable. Mine isn't. My Mac is behind my home router and my phone is on a mobile network behind another one. Neither has an open port.
+So far the story assumed every device was reachable. Mine isn't. A router doing NAT lets the devices behind it start connections out, but not strangers start connections in. My Mac is behind my home router and my phone is on a mobile network behind another one. Neither has an open port.
 
 Tailscale uses techniques based on the STUN and ICE standards to get the two devices to connect anyway, without anyone touching a firewall. The details are in a separate post on NAT traversal that I haven't fully absorbed yet. The practical result is that I never configured port forwarding, and nothing on my router had to change.
 
@@ -77,24 +78,36 @@ When I ran `tailscale status` on the Mac, my phone was listed as a direct connec
 
 There is a fallback for when direct fails, because some networks block UDP or are strict enough that nothing gets through. Tailscale runs relay servers called DERP. Traffic still travels encrypted, with keys the relay never sees, so a DERP server can only pass along bytes it cannot read. I haven't needed one yet.
 
-![A direct connection through NAT with a relay as fallback](/images/tailscale/04-nat-traversal-and-derp.svg)
-*Both devices sit behind NAT. Tailscale tries a direct path first and falls back to a relay.*
+![Both devices sit behind NAT. Tailscale tries a direct path first and falls back to a relay.](/images/tailscale/04-nat-traversal-and-derp.svg)
 
 ## Layer four: who is allowed to talk to what
 
 This was the part I cared about most, given what Pi Pocket can do. The coordination server only gives a device the public keys of the devices that are supposed to reach it. Everyone else on the internet can't even attempt a connection, because their packets can't be decrypted without the right key. To a stranger, my Mac doesn't exist.
 
-![Only devices with the right key can reach the Mac](/images/tailscale/05-who-can-reach-what.svg)
-*A device without the right key can't even start a connection.*
+![A device without the right key can't even start a connection.](/images/tailscale/05-who-can-reach-what.svg)
 
 On top of that, you can write access rules, and each device enforces them itself on incoming traffic. If there is no rule allowing a connection, it is dropped. I haven't written any rules yet, since my tailnet only holds my own devices, but I now know where to start if I ever add someone else.
 
 One warning from my own setup, not from Tailscale's post: a private network is only as private as its members. Anything that can reach Pi Pocket can steer it, so I don't share my tailnet, and I picked Tailscale over a public tunnel for that reason.
 
-## What this looks like for my two agents
+## What I actually ran
 
-Setup was short. I installed Tailscale on the Mac and on the phone, signed in to the same account on both, and switched the phone's VPN on. Pi Pocket then gave me a choice of addressing. Plain http on the tailnet address worked straight away, and the tailnet encrypts it anyway. An https address through `tailscale serve` needed a newer version of Pi Pocket than the one I had, which cost me some time before I found out my copy was simply too old.
+Setup was short. On the Mac:
 
+```bash
+brew install --cask tailscale   # then open the app and sign in
+tailscale status                # lists my devices once the phone has joined
+```
+
+On the phone I installed the Tailscale app, signed in to the same account and switched the VPN on. Then I started Pi Pocket in one of its two Tailscale modes:
+
+```bash
+cd ~/pi-pocket
+npm start -- --access tailscale         # plain http on the tailnet address
+npm start -- --access tailscale-serve   # https at the machine's tailnet name
+```
+
+Plain http worked straight away, and the tailnet encrypts it anyway. The https mode needs two extra things: MagicDNS and HTTPS certificates turned on in the Tailscale admin console, and your user set as the operator with `sudo tailscale set --operator=$USER`. It also failed for me at first, for a dull reason. My copy of Pi Pocket was too old to have that mode at all, and it took me a while to stop blaming Tailscale.
 
 The remaining problem is restarts. If the Mac reboots while I'm away, the apps only come back if the disk is unlocked and a user is logged in, and FileVault gets in the way of both. That deserves its own post.
 
