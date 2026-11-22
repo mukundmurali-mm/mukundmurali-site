@@ -21,7 +21,7 @@ tags:
 > - It works because a central server only swaps public keys. The traffic itself goes device to device, encrypted with keys that never leave those devices.
 > - A private network is only as private as its members: anything that can reach Pi Pocket can steer it.
 
-I run three agents on a Mac mini at home: Hermes, OpenMauseBot and Pi Pocket. Hermes is my general assistant, with access to my files, terminal and email. Pi Pocket is a web app for driving a coding agent from a browser. At my desk all three are great. The moment I leave the house they sit behind my router, which lets nothing in from outside, and I wanted to keep it that way. Pi Pocket in particular can run commands on the Mac as me, so opening a port to the internet for it was never going to happen.
+I run three agents on a Mac mini at home: Hermes, OpenMauseBot and Pi Pocket. Hermes is my general assistant, with access to my files, terminal and email. OpenMauseBot is the one I'm testing as a chief of staff, partly to see how it compares with a Grok bot. Pi Pocket is a web app for driving a coding agent from a browser. At my desk all three are great. The moment I leave the house they sit behind my router, which lets nothing in from outside, and I wanted to keep it that way. Pi Pocket in particular can run commands on the Mac as me, so opening a port to the internet for it was never going to happen.
 
 ## The first workaround: a Telegram bot
 
@@ -42,7 +42,7 @@ What I wanted was the real thing: my phone talking to my Mac as if I were sittin
 
 ## Then Tailscale
 
-I went looking for a better way. The usual options all give something up: port forwarding opens a hole in the firewall, and a public tunnel hands out a link anyone can try. Then I found Tailscale online. I installed it for my agents, my phone could reach my Mac a few minutes later, and I had no idea why it worked. That bothered me enough to go and read how it works.
+I went looking for a better way. The usual options all give something up: port forwarding opens a hole in the firewall, and a public tunnel hands out a link anyone can try. Then I kept running into the same answer: blogs and tutorials about reaching agents from outside your network securely kept suggesting Tailscale. I installed it for my agents, my phone could reach my Mac a few minutes later, and I had no idea why it worked. That bothered me enough to go and read how it works.
 
 This post is what I learned, in the order that finally made it make sense to me. Nearly all of it comes from Tailscale's own write-up, [How Tailscale works](https://tailscale.com/blog/how-tailscale-works), which I'd recommend reading in full.
 
