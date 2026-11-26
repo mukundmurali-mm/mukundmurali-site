@@ -1,0 +1,12 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+version: 1
+site:
+  title: "mukundmurali-site"
+  structure:
+    - type: space
+      key: space-posts
+      title: "Blog posts"
+      path: posts
+      default: true
+      content:
+        directory: ./content/posts
